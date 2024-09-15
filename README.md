@@ -12,7 +12,7 @@ This framework allows you to run a variety of web security tests such as:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/web_security_framework.git
+    git clone https://github.com/kar-ik/WTF.git
     ```
 
 2. Install the dependencies:
