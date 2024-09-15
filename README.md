@@ -1,2 +1,2 @@
-# WASTF
-Web Application Security Testing Framework
+# WTF
+Website Testing Framework
