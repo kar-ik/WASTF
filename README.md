@@ -1,12 +1,16 @@
 # WTF
 Website Testing Framework
+__________________________________________________________________________________________________________________
+This Python-based framework automates the security testing of web applications for the following vulnerabilities:
+- **SQL Injection**
+- **Cross-Site Scripting (XSS)**
+- **Cross-Site Request Forgery (CSRF)**
+- **Insecure HTTP Headers**
+- **Directory Bruteforcing**
 
-This framework allows you to run a variety of web security tests such as:
-- SQL Injection
-- Cross-Site Scripting (XSS)
-- Security Headers Check
-- HTTPS Check
-- Session Management Flaws
+## Features
+- Runs common security tests on any given URL.
+- Outputs a detailed HTML report of vulnerabilities found.
 
 ## Installation
 
@@ -15,7 +19,7 @@ This framework allows you to run a variety of web security tests such as:
     git clone https://github.com/kar-ik/WTF.git
     ```
 
-2. Install the dependencies:
+2. Install dependencies:
     ```bash
     pip install -r requirements.txt
     ```
@@ -25,4 +29,7 @@ This framework allows you to run a variety of web security tests such as:
     python framework.py
     ```
 
+## Example Usage
 
+```bash
+Enter the target URL (e.g., http://example.com): http://example.com
