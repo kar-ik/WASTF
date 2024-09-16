@@ -72,7 +72,9 @@ def directory_bruteforce(url):
     return False, "No accessible directories found."
 
 def generate_report(test_results, target):
-    report_path = f"{REPORT_DIR}/report_{target}.html"
+    sanitized_target = re.sub(r'[^a-zA-Z0-9]', '_', target)
+    report_path = f"{REPORT_DIR}/report_{sanitized_target}.html"
+    
     with open(report_path, "w") as report:
         report.write(f"<html><head><title>Security Test Report for {target}</title></head><body>")
         report.write(f"<h1>Security Test Report for {target}</h1>")
@@ -82,8 +84,9 @@ def generate_report(test_results, target):
             report.write(f"<li style='color:{color};'><strong>{test_name}:</strong> {message}</li>")
         report.write("</ul>")
         report.write("</body></html>")
+    
     return report_path
-
+    
 def run_tests(url):
     print(colored(f"Running security tests for {url}", "blue"))
     
