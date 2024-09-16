@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from termcolor import colored
 import os
+import subprocess
 
 REPORT_DIR = "reports"
 os.makedirs(REPORT_DIR, exist_ok=True)
@@ -115,6 +116,41 @@ def run_tests(url):
     report_path = generate_report(test_results, url)
     print(f"Report saved to {report_path}")
 
+def update_tool():
+    try:
+
+        if not os.path.exists('.git'):
+            print("This tool is not a Git repository. Please clone it from the repository.")
+            return
+        
+        print("Checking for updates...")
+        subprocess.run(['git', 'fetch'], check=True)
+
+        status = subprocess.run(['git', 'status'], stdout=subprocess.PIPE, text=True, check=True)
+        
+        if "Your branch is up to date" in status.stdout:
+            print("Your tool is already up-to-date.")
+        else:
+            subprocess.run(['git', 'pull'], check=True)
+            print("Tool updated successfully.")
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred during the update process: {str(e)}")
+
+def main_menu():
+    print("Security Testing Tool")
+    print("1. Run security tests")
+    print("2. Update tool")
+    
+    choice = input("Enter your choice: ")
+    
+    if choice == "1":
+        target_url = input("Enter the target URL (e.g., http://example.com): ")
+        run_tests(target_url)  
+    elif choice == "2":
+        update_tool()
+    else:
+        print("Invalid choice.")
+
 if __name__ == "__main__":
-    target_url = input("Enter the target URL (e.g., http://example.com): ")
-    run_tests(target_url)
+    main_menu()
+
