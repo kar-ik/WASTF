@@ -4,6 +4,10 @@ from bs4 import BeautifulSoup
 from termcolor import colored
 import os
 import subprocess
+from crawler import crawl_page
+
+target_url = "http://example.com"
+crawl_page(target_url)
 
 REPORT_DIR = "reports"
 os.makedirs(REPORT_DIR, exist_ok=True)
