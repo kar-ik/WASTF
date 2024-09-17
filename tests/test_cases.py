@@ -1,47 +1,6 @@
 import unittest
 from unittest.mock import patch
 from framework import sql_injection_test, xss_test, csrf_test, insecure_headers_test, directory_bruteforce
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
-
-options = Options()
-options.headless = True
-
-driver = webdriver.Firefox(options=options)
-
-def crawl_page(url):
-    driver.get(url)
-    
-    links = driver.find_elements(By.TAG_NAME, 'a')
-    print("\n--- Links Found ---")
-    for link in links:
-        href = link.get_attribute('href')
-        print(f"Link: {href}")
-    
-    forms = driver.find_elements(By.TAG_NAME, 'form')
-    print("\n--- Forms Found ---")
-    for form in forms:
-        action = form.get_attribute('action')
-        method = form.get_attribute('method')
-        print(f"Form action: {action}, method: {method}")
-        
-        inputs = form.find_elements(By.TAG_NAME, 'input')
-        for input_field in inputs:
-            input_name = input_field.get_attribute('name')
-            input_type = input_field.get_attribute('type')
-            print(f"Input name: {input_name}, type: {input_type}")
-
-    hidden_elements = driver.find_elements(By.XPATH, "//input[@type='hidden']")
-    print("\n--- Hidden Elements Found ---")
-    for hidden in hidden_elements:
-        print(f"Hidden field: {hidden.get_attribute('name')}")
-
-target_url = "http://example.com"
-crawl_page(target_url)
-
-driver.quit()
-
 class TestSecurityFramework(unittest.TestCase):
     
     @patch('requests.get')
